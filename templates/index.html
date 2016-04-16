@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Title-->
+    <link rel="shortcut icon" href="/static/Image/title.jpg"/>
+    <title>Graduation Project</title>
+    <!-- Bootstrap core CSS -->
+    {#    <link href="bootstrap.min.css" rel="stylesheet">#}
+    <link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+            padding-right: 0px !important;
+
+
+        }
+
+        .container {
+            width: 1000px !important;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 300px;
+            background-color: black;
+            margin-bottom: 30px;
+        }
+
+        .carousel .item {
+            height: 300px;
+            background-color: black;
+        }
+
+        .carousel img {
+            height: 300px;
+            width: 100%;
+        }
+
+        .col-xs-6 #notice1, #notice2 {
+            background-image: url("/static/Image/notice.jpg");
+            /*background-color: white;*/
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        .col-xs-6 h2 {
+            font-family: "Microsoft YaHei UI", monospace;
+        }
+
+        .col-xs-6 p {
+            font-size: large;
+            color: white;
+            text-indent: 2em;
+        }
+        hr{
+            border-color: #d5d5d5;
+        }
+        .divider {
+            margin-top: 40px;
+        }
+
+        .row {
+            width: 100%;
+        }
+
+        .col-xs-6 a {
+            font-size: large;
+            font-weight: bold;
+        }
+
+        img.no_change {
+            min-height: 300px;
+            max-width: 100%;
+        }
+
+        .modal-open {
+            overflow: initial;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/home">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">搜索引擎在线课程网站</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">公告 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">作业</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">学习交流 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">师生问答</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">学习论坛</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" action="./search.html" method="get">
+                <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./login.html">登录</a></li>
+                <li><a href="./register.html">注册</a></li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#About">关于</a>
+                    <!--<a href="#" onclick="alert('dasdasd')">About</a>-->
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <!--页面下方小圆点-->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <!--轮播的内容-->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <a href="#">
+                <img class="no_change" src="/static/Image/1.jpg" alt="图片">
+                <div class="carousel-caption">
+                    <h2 style="color: #0f0f0f">Start Learning Now!</h2>
+                </div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="#">
+                <img class="no_change" src="/static/Image/2.jpg" alt="图片">
+                <div class="carousel-caption">
+                    <h2 style="color: #0f0f0f">Communication!</h2>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <!--左右按钮-->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">上一页</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">下一页</span>
+    </a>
+</div>
+<div class="row center-block" style="padding-bottom: 70px">
+    <div class="col-xs-6 center-block">
+        <h2 class="text-center">最新公告</h2>
+        <div id="notice1">
+            <p>这是公告栏</p>
+            <!--<a href="index.html">link</a>-->
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>这是公告栏</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+        </div>
+    </div>
+    <div class="col-xs-6 center-block">
+        <h2 class="text-center">最新公告</h2>
+        <div id="notice2">
+            <p>这是公告栏</p>
+            <a href="index.html">link</a>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+            <p>dasdasdasdasdasd</p>
+        </div>
+    </div>
+</div>
+<hr class="divider">
+<footer class="center-block">
+    <p class="pull-right">
+        <a href="#top" style="padding-right: 20px">
+            <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                Top
+            </button>
+        </a>
+    </p>
+    <p class="text-center">Copyright@2016Arbin Wu
+        {#        <a href="mailto:arbinwu2016@gmail.com">联系我</a>#}
+    </p>
+</footer>
+<div class="modal fade" id="About">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">关于</h4>
+            </div>
+            <div class="modal-body">
+                <p>内容</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- jquery JavaScript -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
