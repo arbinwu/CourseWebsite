@@ -18,7 +18,7 @@
         }
 
         .container {
-            width: 1000px !important;
+            width: 100% !important;
         }
 
         .distance {
@@ -34,6 +34,10 @@
 
         .span_size {
             width: 150px;
+        }
+
+        #About {
+            padding-top: 10%;
         }
     </style>
 </head>
@@ -84,12 +88,12 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if state == None %}
                     <li><a href="./login.html">登录</a></li>
-                    <li><a href="./register.html">注册</a></li>
                 {% endif %}
                 {% if state == 'login' %}
-                    <li><a href="/">欢迎，{{ user }}</a></li>
-                    <li><a href="./register.html">注册</a></li>
+                    <li><a>欢迎，{{ user }}</a></li>
+                    <li><a href="./logout.html">注销</a></li>
                 {% endif %}
+                <li><a href="./register.html">注册</a></li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#About">关于</a>
                     <!--<a href="#" onclick="alert('dasdasd')">About</a>-->
@@ -116,30 +120,31 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <h2 style="text-align: center">欢迎注册！</h2>
-<form>
+<form action="register.html" method="post">
+    {% csrf_token %}
     <div class="distance">
         <div class="input-group size">
             <span class="input-group-addon span_size">请输入姓名:</span>
             <input type="text" class="form-control " name="name" placeholder="姓名">
         </div>
         <div>
-            <p style="color: red">*提醒：姓名仅支持xxx*</p>
+            <p style="color: red">*提醒：姓名仅支持字母或数字*</p>
         </div>
         <div class="input-group size">
             <span class="input-group-addon span_size">请输入用户名:</span>
             <input type="text" class="form-control" name="username" placeholder="Username" aria-describedby="username">
         </div>
         <div>
-            <p style="color: red">*提醒：用户名仅限数字*</p>
+            <p style="color: red">*提醒：用户名仅支持字母或数字*</p>
         </div>
         <div class="input-group size">
             <span class="input-group-addon span_size">请输入密码:</span>
             <input type="text" class="form-control" name="password" placeholder="Password" aria-describedby="password">
         </div>
         <div class="input-group size">
-            <span class="input-group-addon span_size" id="password2">请确认密码:</span>
-            <input type="text" class="form-control" name="password2" placeholder="Password"
-                   aria-describedby="password2">
+            <span class="input-group-addon span_size" id="repeat_password">请确认密码:</span>
+            <input type="text" class="form-control" name="repeat_password" placeholder="Password"
+                   aria-describedby="repeat_password">
         </div>
         <div class="btn-group btn-group-justified size" role="group">
             <div class="btn-group" role="group">
@@ -151,6 +156,18 @@
         </div>
     </div>
 </form>
+
+{% if is_error == True %}
+    <script>
+        var error = "{{ error }}";
+        alert('错误:'+error);
+    </script>
+{% endif %}
+{% if is_error == False and error == '注册成功' %}
+    <script>
+        alert('注册成功')
+    </script>
+{% endif %}
 <!-- jquery JavaScript -->
 <script src="/static/js/jquery.min.js"></script>
 <!-- Bootstrap core JavaScript -->

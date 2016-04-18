@@ -7,9 +7,18 @@ from django.contrib import auth
 # Create your views here.
 def index(request):
     state = None
-    content = {
-        'state': state
-    }
+    if request.user.is_authenticated():
+        state = 'login'
+        content = {
+            'state': state,
+            'user': request.user.first_name,
+        }
+
+    else:
+        content = {
+            'state': state
+        }
+
     return render(request, 'index.html', content)
 
 
@@ -18,7 +27,6 @@ def login(request):
         username = str(request.POST['username'])
         password = str(request.POST['password'])
         user = auth.authenticate(username=username, password=password)
-        # print(name.name)
         if user is not None and user.is_active:
             # Correct password, and the user is marked "active"
             auth.login(request, user)
@@ -29,16 +37,28 @@ def login(request):
                 'state': state,
                 'user': request.user.first_name,
             }
-            return render(request, 'index.html', content)
+            # print(request.user.is_staff)
         else:
             # Show an error page
             state = None
+            is_error = True
             content = {
-                'state': state
+                'state': state,
+                'is_error': is_error,
             }
-            return render(request, 'login.html', content)
+        return render(request, 'index.html', content)
     else:
         return render(request, 'login.html')
+
+
+def logout(request):
+    if request.user.is_authenticated():
+        auth.logout(request)
+        state = None
+        content = {
+            'state': state
+        }
+        return render(request, 'index.html', content)
 
 # def login(request):
 #     # user = auth.authenticate(username='john', password='secret')

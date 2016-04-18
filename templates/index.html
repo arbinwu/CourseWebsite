@@ -20,7 +20,7 @@
         }
 
         .container {
-            width: 1000px !important;
+            width: 100% !important;
         }
 
         .carousel {
@@ -82,6 +82,10 @@
         .modal-open {
             overflow: initial;
         }
+
+        #About {
+            padding-top: 10%;
+        }
     </style>
 </head>
 
@@ -132,20 +136,19 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
 
-                <ul class="nav navbar-nav navbar-right">
-                    {% if state == None %}
-                        <li><a href="./login.html">登录</a></li>
-                        <li><a href="./register.html">注册</a></li>
-                    {% endif %}
-                    {% if state == 'login' %}
-                        <li><a>欢迎，{{ user }}</a></li>
-                        <li><a href="./register.html">注册</a></li>
-                    {% endif %}
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#About">关于</a>
-                        <!--<a href="#" onclick="alert('dasdasd')">About</a>-->
-                    </li>
-                </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin: 0px">
+                {% if state == None %}
+                    <li><a href="./login.html">登录</a></li>
+                {% endif %}
+                {% if state == 'login' %}
+                    <li><a>欢迎，{{ user }}</a></li>
+                    <li><a href="./logout.html">注销</a></li>
+                {% endif %}
+                <li><a href="./register.html">注册</a></li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#About">关于</a>
+                </li>
+            </ul>
 
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -237,7 +240,7 @@
             </button>
         </a>
     </p>
-    <p class="text-center">Copyright@2016Arbin Wu
+    <p class="text-center">Copyright@ 2016Arbin Wu
         {#        <a href="mailto:arbinwu2016@gmail.com">联系我</a>#}
     </p>
 </footer>
