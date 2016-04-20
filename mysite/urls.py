@@ -18,6 +18,7 @@ from django.contrib import admin
 
 from login import views as login_views
 from register import views as register_views
+from notice import views as notice_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +26,6 @@ urlpatterns = [
     url(r'^$', login_views.index),
     url(r'^logout.html', login_views.logout),
     url(r'^login.html', login_views.login),
+    url(r'^notice.html', notice_views.view_notice),
+    url(r'^details.html', notice_views.details)
 ]
