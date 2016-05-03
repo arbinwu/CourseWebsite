@@ -1,27 +1,36 @@
 from django.shortcuts import render
-from  django.contrib.auth.models import User
+# from  django.contrib.auth.models import User
 from django.contrib import auth
+from notice.models import Notice
 
 
 # Create your views here.
 def index(request):
     state = None
+    notice = Notice.objects.order_by('-time')[0]
     if request.user.is_authenticated():
         state = 'login'
         content = {
             'state': state,
             'user': request.user.first_name,
+            'notice_title': notice.title,
+            'notice_content': notice.content,
+            'notice_id': notice.id,
         }
 
     else:
         content = {
-            'state': state
+            'state': state,
+            'notice_title': notice.title,
+            'notice_content': notice.content,
+            'notice_id': notice.id,
         }
 
     return render(request, 'index.html', content)
 
 
 def login(request):
+    notice = Notice.objects.order_by('-time')[0]
     if 'username' in request.POST:
         username = str(request.POST['username'])
         password = str(request.POST['password'])
@@ -44,6 +53,9 @@ def login(request):
             content = {
                 'state': state,
                 'is_error': is_error,
+                'notice_title': notice.title,
+                'notice_content': notice.content,
+                'notice_id': notice.id,
             }
         return render(request, 'index.html', content)
     else:
@@ -51,11 +63,15 @@ def login(request):
 
 
 def logout(request):
+    notice = Notice.objects.order_by('-time')[0]
     if request.user.is_authenticated():
         auth.logout(request)
         state = None
         content = {
-            'state': state
+            'state': state,
+            'notice_title': notice.title,
+            'notice_content': notice.content,
+            'notice_id': notice.id,
         }
         return render(request, 'index.html', content)
 

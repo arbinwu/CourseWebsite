@@ -70,7 +70,6 @@ def view_notice(request):
 
 def details(request):
     state = None
-    # id = request.GET['id']
     notice = Notice.objects.get(id=request.GET['id'])
     if request.user.is_authenticated():
         state = 'login'
