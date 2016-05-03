@@ -64,6 +64,12 @@
             font-size: larger;
         }
 
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-size: larger;
+            resize: none;
+        }
     </style>
 </head>
 
@@ -179,10 +185,25 @@
                     </nav>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="publish">
-                <ol>
-                    <li>222</li>
-                </ol>
+            <div role="tabpanel" class="tab-pane" id="publish" style="margin-top: 20px">
+                {% if publish == 1 %}
+                <form action="./add_notice.html" method="post">
+                    {% csrf_token %}
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon1">公告标题</span>
+                        <input type="text" class="form-control" name="new_title" aria-describedby="sizing-addon1">
+                    </div>
+                    <div>
+                        <h3>公告内容:</h3>
+                        <textarea name="new_content"></textarea>
+                        <div style="padding-left: 85%;padding-top: 20px">
+                        <button type="submit" class="btn btn-primary">提交并发布公告</button>
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                    <div class="alert alert-danger" role="alert" style="text-align: center;font-size: large">您无权进行此操作</div>
+                {% endif %}
             </div>
             <div role="tabpanel" class="tab-pane" id="messages">...</div>
             <div role="tabpanel" class="tab-pane" id="settings">...</div>
@@ -223,6 +244,16 @@
 </div><!-- /.modal -->
 {#</div>#}
 <!-- jquery JavaScript -->
+{% if is_error == True %}
+    <script>
+        alert('错误:'+'{{ error }}');
+    </script>
+{% endif %}
+{% if error == '公告发布成功，请查看！' %}
+    <script>
+        alert('{{ error }}');
+    </script>
+{% endif %}
 <script src="/static/js/jquery.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script src="/static/js/bootstrap.min.js"></script>

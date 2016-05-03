@@ -51,13 +51,14 @@ from django.contrib import auth
 
 def view_notice(request):
     state = None
-    result = Notice.objects.all()
+    result = Notice.objects.order_by('-time')
     if request.user.is_authenticated():
         state = 'login'
         content = {
             'state': state,
             'user': request.user.first_name,
             'result': result,
+            'publish': request.user.is_staff,
         }
     else:
         content = {
@@ -79,7 +80,7 @@ def details(request):
             'notice_title': notice.title,
             'notice_author': notice.author,
             'notice_time': notice.time,
-            'notice.content': notice.content,
+            'notice_content': notice.content,
         }
     else:
         content = {
@@ -90,3 +91,37 @@ def details(request):
             'notice_content': notice.content,
         }
     return render(request, 'details.html', content)
+
+
+def add(request):
+    state = None
+    is_error = False
+    error = ''
+    new_title = str(request.POST['new_title'])
+    new_content = str(request.POST['new_content'])
+    if new_title == '':
+        is_error = True
+        error = '公告标题不能为空'
+    elif new_content == '':
+        is_error = True
+        error = '公告内容不能为空'
+    else:
+        new_author = request.user.first_name
+        new_notice = Notice.objects.create(title=new_title, author=new_author, content=new_content)
+        new_notice.save()
+        error = '公告发布成功，请查看！'
+    if request.user.is_authenticated():
+        state = 'login'
+        content = {
+            'state': state,
+            'is_error': is_error,
+            'error': error,
+            'user': request.user.first_name,
+        }
+    else:
+        content = {
+            'state': state,
+            'is_error': is_error,
+            'error': error,
+        }
+    return render(request, 'notice.html', content)

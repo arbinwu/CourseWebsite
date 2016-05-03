@@ -7,3 +7,9 @@ class Notice(models.Model):
     time = models.DateTimeField(auto_now=True)
     author = models.CharField(max_length=40)
     content = models.TextField()
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['time']

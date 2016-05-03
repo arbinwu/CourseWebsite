@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^logout.html', login_views.logout),
     url(r'^login.html', login_views.login),
     url(r'^notice.html', notice_views.view_notice),
-    url(r'^details.html', notice_views.details)
+    url(r'^details.html', notice_views.details),
+    url(r'^add_notice.html', notice_views.add),
 ]
