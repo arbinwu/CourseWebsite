@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/html">
 <head>
     {#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
     <meta charset="utf-8">
@@ -23,40 +23,6 @@
             width: 100% !important;
         }
 
-        .carousel {
-            width: 100%;
-            height: 300px;
-            background-color: black;
-            margin-bottom: 30px;
-        }
-
-        .carousel .item {
-            height: 300px;
-            background-color: black;
-        }
-
-        .carousel img {
-            height: 300px;
-            width: 100%;
-        }
-
-        .col-xs-6 #notice1, #notice2 {
-            background-image: url("/static/Image/notice.jpg");
-            /*background-color: white;*/
-            height: 300px;
-            overflow-y: scroll;
-        }
-
-        .col-xs-6 h2 {
-            font-family: "Microsoft YaHei UI", monospace;
-        }
-
-        .col-xs-6 p {
-            font-size: large;
-            color: white;
-            text-indent: 2em;
-        }
-
         hr {
             border-color: #d5d5d5;
         }
@@ -65,26 +31,22 @@
             margin-top: 40px;
         }
 
-        .row {
-            width: 100%;
-        }
-
-        .col-xs-6 a {
-            font-size: large;
-            font-weight: bold;
-        }
-
-        img.no_change {
-            min-height: 300px;
-            max-width: 100%;
-        }
-
         .modal-open {
             overflow: initial;
         }
 
         #About {
             padding-top: 10%;
+        }
+
+        #q_and_a {
+            font-family: "Microsoft YaHei UI";
+            font-size: larger;
+        }
+
+        #content {
+            padding-left: 30%;
+            width: 1000px;
         }
     </style>
 </head>
@@ -153,67 +115,46 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <!--页面下方小圆点-->
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <!--轮播的内容-->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <a href="#">
-                <img class="no_change" src="/static/Image/1.jpg" alt="图片">
-                <div class="carousel-caption">
-                    <h2 style="color: #0f0f0f">Start Learning Now!</h2>
-                </div>
-            </a>
-        </div>
-        <div class="item">
-            <a href="#">
-                <img class="no_change" src="/static/Image/2.jpg" alt="图片">
-                <div class="carousel-caption">
-                    <h2 style="color: #0f0f0f">Communication!</h2>
-                </div>
-            </a>
-        </div>
-
-    </div>
-
-    <!-- Controls -->
-    <!--左右按钮-->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">上一页</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">下一页</span>
-    </a>
+<div style="padding-top: 30px;padding-left: 50px">
+    <button type="button" class="btn btn-success btn-lg" onclick=>我要提问</button>
 </div>
-<div class="row center-block" style="padding-bottom: 70px">
-    <div class="col-xs-6 col-md-6 center-block">
-        <h2 class="text-center">最新公告</h2>
-        <div id="notice1" style="word-wrap: break-word">
-            <p>公告标题；<a href="details.html?id={{ notice_id }}">{{ notice_title }}</a></p>
-            <p>简要内容：{{ notice_content }}<p>
-{#            <p style="font-size: small">详情请点击标题进行查看</p>#}
+<div id="content">
+
+    <div id="q_and_a" class="center-block">
+        <p>xxx提问</p>
+        <div style="padding-right: 10%">
+            <pre>question</pre>
+            <br>
         </div>
+        <div style="padding-left: 10%">
+            <pre>answer</pre>
+        </div>
+        <p style="text-align: right">xxx回答</p>
+        <hr>
     </div>
-    <div class="col-xs-6 col-md-6 center-block">
-        <h2 class="text-center">最新作业</h2>
-        <div id="notice2">
-            <p>这是作业栏</p>
-            <a href="index.html">link</a>
-            <p>dasdasdasdasdasd</p>
-            <p>dasdasdasdasdasd</p>
-            <p>dasdasdasdasdasd</p>
-            <p>dasdasdasdasdasd</p>
+    <div id="q_and_a" class="center-block">
+        <p>xxx提问</p>
+        <div style="padding-right: 10%">
+            <pre>question</pre>
+            <br>
         </div>
+        <div style="padding-left: 10%">
+            <pre>answer</pre>
+        </div>
+        <p style="text-align: right">xxx回答</p>
+        <hr>
+    </div>
+    <div id="q_and_a" class="center-block">
+        <p>xxx提问</p>
+        <div style="padding-right: 10%">
+            <pre>question</pre>
+            <br>
+        </div>
+        <div style="padding-left: 10%">
+            <pre>answer</pre>
+        </div>
+        <p style="text-align: right">xxx回答</p>
+        <hr>
     </div>
 </div>
 <hr class="divider">
@@ -227,7 +168,7 @@
         </a>
     </p>
     <p class="text-center">Copyright@ 2016Arbin Wu
-        {#        <a href="mailto:arbinwu2016@gmail.com">联系我</a>#}
+        <a href="mailto:arbinwu2016@gmail.com">联系我</a>
     </p>
 </footer>
 <div class="modal fade" id="About">
