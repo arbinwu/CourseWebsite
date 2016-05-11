@@ -22,7 +22,7 @@ def q_and_a(request):
             'question': questions,
             'answer': answers,
         }
-    return render('q&a.html', content)
+    return render(request, 'q&a.html', content)
 
 
 def add_question(request):

@@ -123,4 +123,5 @@ def add(request):
             'is_error': is_error,
             'error': error,
         }
-    return HttpResponseRedirect('notice.html')
+    # return HttpResponseRedirect('notice.html')
+    return render(request, 'notice.html', content)

@@ -20,7 +20,7 @@ from login import views as login_views
 from register import views as register_views
 from notice import views as notice_views
 from question import views as question_views
-
+from forum import views as forum_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register.html', register_views.register),
@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^q&a.html', question_views.q_and_a),
     url(r'^add_question.html', question_views.add_question),
     url(r'^add_answer.html', question_views.add_answer),
+    url(r'^forum.html', forum_views.view),
+    url(r'^topic.html',forum_views.topic)
 ]
