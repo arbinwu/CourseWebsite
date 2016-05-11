@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" xmlns="http://www.w3.org/1999/html">
+<html lang="zh-cn">
 <head>
     {#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
     <meta charset="utf-8">
@@ -47,6 +47,12 @@
         #content {
             padding-left: 30%;
             width: 1000px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: none;
         }
     </style>
 </head>
@@ -116,11 +122,60 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div style="padding-top: 30px;padding-left: 50px">
-    <button type="button" class="btn btn-success btn-lg" onclick=>我要提问</button>
+    <button type="button" class="btn btn-success btn-lg" onclick="func1()">我要提问</button>
 </div>
 <div id="content">
+    <div id="input_q" style="display: none">
+        <h4>请描述您的问题:</h4>
+        <form action="./add_question.html" method="post">
+            {% csrf_token %}
+            <div>
+                <textarea name="question_content"></textarea>
+            </div>
+            <div style="padding-bottom: 40px">
+                <button type="submit" class="btn btn-primary" style="float: right">提交问题</button>
+            </div>
+        </form>
+    </div>
+    <div id="q_and_a" class="center-block">
+        {% for q in question %}
 
-    <div id="q_and_a" class="center-block">
+            <p>{{ q.questioner }}提问 &nbsp;&nbsp;<span style="font-size: small">{{ q.time }}</span></p>
+            <div style="padding-right: 10%">
+                <pre>{{ q.content }}</pre>
+                <br>
+            </div>
+            {% for a in answer %}
+                {% if a.question_id == q.id %}
+                    <div style="padding-left: 10%">
+                        <pre>{{ a.content }}</pre>
+                    </div>
+                    <p style="text-align: right">{{ a.answerer }}回答 &nbsp;&nbsp;<span
+                            style="font-size: small">{{ a.time }}</span></p>
+                {% endif %}
+            {% endfor %}
+            <p style="text-align: right"><a style="font-size: medium;padding-right: 10%;"
+                                            href="javascript:func2('input' + '{{ q.id }}')">回答</a></p>
+            <div id="input0" style="display: none">
+                <script>
+                    var new_id = 'input' + '{{ q.id }}'
+                    document.getElementById("input0").setAttribute("id", new_id);
+                </script>
+                <form action="./add_answer.html" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <input type="hidden" name="question_id" value="{{ q.id }}">
+                        <textarea placeholder="请编辑您的答案..." name="answer_content"></textarea>
+                    </div>
+                    <div style="padding-bottom: 40px">
+                        <button type="submit" class="btn btn-primary" style="float: right">提交答案</button>
+                    </div>
+                </form>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+    <div class="center-block">
         <p>xxx提问</p>
         <div style="padding-right: 10%">
             <pre>question</pre>
@@ -132,19 +187,7 @@
         <p style="text-align: right">xxx回答</p>
         <hr>
     </div>
-    <div id="q_and_a" class="center-block">
-        <p>xxx提问</p>
-        <div style="padding-right: 10%">
-            <pre>question</pre>
-            <br>
-        </div>
-        <div style="padding-left: 10%">
-            <pre>answer</pre>
-        </div>
-        <p style="text-align: right">xxx回答</p>
-        <hr>
-    </div>
-    <div id="q_and_a" class="center-block">
+    <div class="center-block">
         <p>xxx提问</p>
         <div style="padding-right: 10%">
             <pre>question</pre>
@@ -193,5 +236,33 @@
 <script src="/static/js/jquery.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script src="/static/js/bootstrap.min.js"></script>
+<script>
+    var flag1 = true;
+    var func1 = function () {
+        if (flag1) {
+            $('#input_q').show();
+            flag1 = false;
+        }
+        else {
+            $('#input_q').hide();
+            flag1 = true;
+        }
+
+    }
+
+    var flag2 = true;
+    var func2 = function (element) {
+        console.log(element)
+        if (flag2) {
+
+            $('#' + element).show();
+            flag2 = false;
+        }
+        else {
+            $('#' + element).hide();
+            flag2 = true;
+        }
+    }
+</script>
 </body>
 </html>

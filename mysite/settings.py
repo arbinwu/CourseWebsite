@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'login',
     'register',
     'notice',
+    'question',
 ]
 
 MIDDLEWARE_CLASSES = [

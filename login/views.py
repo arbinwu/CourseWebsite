@@ -46,8 +46,8 @@ def login(request):
                 'user': request.user.first_name,
             }
             # print(request.user.is_staff)
-        else:
-            # Show an error page
+            return render(request, 'index.html', content)
+        else:  # Show an error page
             state = None
             is_error = True
             content = {
@@ -57,7 +57,8 @@ def login(request):
                 'notice_content': notice.content,
                 'notice_id': notice.id,
             }
-        return render(request, 'index.html', content)
+            return render(request, 'login.html', content)
+
     else:
         return render(request, 'login.html')
 

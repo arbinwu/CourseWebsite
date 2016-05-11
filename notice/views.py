@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from notice.models import Notice
 from django.contrib import auth
-
+from django.http import HttpResponseRedirect
 
 # 动态建表
 # def create(request):
@@ -123,4 +123,4 @@ def add(request):
             'is_error': is_error,
             'error': error,
         }
-    return render(request, 'notice.html', content)
+    return HttpResponseRedirect('notice.html')

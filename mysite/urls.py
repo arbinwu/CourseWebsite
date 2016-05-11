@@ -31,4 +31,6 @@ urlpatterns = [
     url(r'^details.html', notice_views.details),
     url(r'^add_notice.html', notice_views.add),
     url(r'^q&a.html', question_views.q_and_a),
+    url(r'^add_question.html', question_views.add_question),
+    url(r'^add_answer.html', question_views.add_answer),
 ]
