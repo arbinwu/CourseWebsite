@@ -11,6 +11,7 @@
     <!-- Bootstrap core CSS -->
     {#    <link href="bootstrap.min.css" rel="stylesheet">#}
     <link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
     <style>
         body {
             padding-top: 50px;
@@ -75,6 +76,12 @@
             background-color: #FFF;
             border: hidden;
             border-radius: 4px;
+        }
+
+        textarea {
+            resize: none;
+            width: 100%;
+            height: 200px;
         }
     </style>
 </head>
@@ -143,26 +150,36 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div style="padding-left: 15%;padding-right: 15%;padding-top: 20px">
+<div style="padding-left: 15%;padding-right: 15%;padding-top: 20px;">
     <div style="background-color: #294F6E;padding-left: 20px;height: 40px">
-        <span class="head">title</span>
-        <span class="head" style="float: right;padding-right: 30px;">回复数：10</span>
+        <span class="head">{{ topic.title }}</span>
+        <span class="head" style="float: right;padding-right: 30px;">回复数：{{ count }}</span>
     </div>
     <div>
         <table class="table table-bordered" style="min-height: 300px;margin: 0px">
             <tr>
-                <td id="author" rowspan="2"><a href="#">name</a></td>
-                <td id="time" colspan="4" rowspan="1">time1</td>
-                {#            <td colspan="2">content1</td>#}
+                <td id="author" rowspan="2"><a href="#">{{ topic.author }}</a></td>
+                <td id="time" colspan="4" rowspan="1">{{ topic.time }}</td>
             </tr>
             <tr>
                 <td colspan="4" rowspan="4">
-                <pre>111dsa dasdw
-               das
-                </pre>
+                <pre>{{ topic.content }}</pre>
                 </td>
             </tr>
         </table>
+        {% for r in reply %}
+        <table class="table table-bordered" style="min-height: 300px;margin: 0px">
+            <tr>
+                <td id="author" rowspan="2"><a href="#">{{ r.author }}</a></td>
+                <td id="time" colspan="4" rowspan="1">{{ r.time }}</td>
+            </tr>
+            <tr>
+                <td colspan="4" rowspan="4">
+                <pre>{{ r.content }}</pre>
+                </td>
+            </tr>
+        </table>
+        {% endfor %}
         <table class="table table-bordered" style="min-height: 300px;margin: 0px">
             <tr>
                 <td id="author" rowspan="2"><a href="#">name</a></td>
@@ -178,6 +195,24 @@
             </tr>
         </table>
     </div>
+</div>
+<div style="padding-left: 15%;padding-right: 15%;padding-top: 40px;">
+
+    <form action="./add_reply.html"method="post">
+        <input type="hidden" id="title_id" name="id">
+        {% csrf_token %}
+        <div>
+            <textarea name="new_reply" placeholder="我想说的..."></textarea>
+        </div>
+        <div style="padding-bottom: 40px">
+            <button type="submit" class="btn btn-primary" style="float: right">发表回复</button>
+        </div>
+    </form>
+    <script>
+        var url = location.href.split('=')[1];
+        $('#title_id').val(url);
+        console.log(url);
+    </script>
 </div>
 <hr class="divider">
 <footer class="center-block">

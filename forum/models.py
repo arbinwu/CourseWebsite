@@ -6,6 +6,7 @@ class Topic(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=40)
     time = models.DateTimeField(auto_now=True)
+    content = models.TextField(default='')
 
     def __unicode__(self):
         return self.title
