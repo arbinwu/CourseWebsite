@@ -139,16 +139,15 @@
     </div>
     <div id="q_and_a" class="center-block">
         {% for q in question %}
-
             <p>{{ q.questioner }}提问 &nbsp;&nbsp;<span style="font-size: small">{{ q.time }}</span></p>
             <div style="padding-right: 10%">
-                <pre>{{ q.content }}</pre>
+                <pre style="word-break: break-all;word-wrap: break-word;white-space: pre-wrap">{{ q.content }}</pre>
                 <br>
             </div>
             {% for a in answer %}
-                {% if a.question_id == q.id %}
+                {% if a.questions_id == q.id %}
                     <div style="padding-left: 10%">
-                        <pre>{{ a.content }}</pre>
+                        <pre style="word-break: break-all;word-wrap: break-word;white-space: pre-wrap">{{ a.content }}</pre>
                     </div>
                     <p style="text-align: right">{{ a.answerer }}回答 &nbsp;&nbsp;<span
                             style="font-size: small">{{ a.time }}</span></p>
@@ -174,30 +173,6 @@
             </div>
             <hr>
         {% endfor %}
-    </div>
-    <div class="center-block">
-        <p>xxx提问</p>
-        <div style="padding-right: 10%">
-            <pre>question</pre>
-            <br>
-        </div>
-        <div style="padding-left: 10%">
-            <pre>answer</pre>
-        </div>
-        <p style="text-align: right">xxx回答</p>
-        <hr>
-    </div>
-    <div class="center-block">
-        <p>xxx提问</p>
-        <div style="padding-right: 10%">
-            <pre>question</pre>
-            <br>
-        </div>
-        <div style="padding-left: 10%">
-            <pre>answer</pre>
-        </div>
-        <p style="text-align: right">xxx回答</p>
-        <hr>
     </div>
 </div>
 <hr class="divider">

@@ -8,6 +8,7 @@ def q_and_a(request):
     state = None
     questions = Question.objects.order_by('-time')
     answers = Answer.objects.order_by('time')
+    print(answers[0].questions_id)
     if request.user.is_authenticated():
         state = 'login'
         content = {
@@ -41,6 +42,6 @@ def add_answer(request):
     if new_content == '':
         return q_and_a(request)
     new_question_id = int(request.POST['question_id'])
-    new_answer = Answer.objects.create(answerer=new_answerer, content=new_content, question_id=new_question_id)
+    new_answer = Answer.objects.create(answerer=new_answerer, content=new_content, questions_id=new_question_id)
     new_answer.save()
     return HttpResponseRedirect('q&a.html')

@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from forum.models import Topic, Reply
-from  django.http import HttpResponseRedirect
-from django.db.models import Count
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -66,4 +65,11 @@ def add_reply(request):
     content = str(request.POST['new_reply'])
     new_reply = Reply.objects.create(author=author, topic_id=topic_id, content=content)
     new_reply.save()
-    return HttpResponseRedirect('topic.html?id='+str(topic_id))
+    # this_topic = Topic()
+    this = Topic.objects.get(id=topic_id)
+    print(this.reply_count)
+    this.reply_count += 1
+    this.save()
+    print(this.reply_count)
+    # this_topic.save()
+    return HttpResponseRedirect('topic.html?id=' + str(topic_id))

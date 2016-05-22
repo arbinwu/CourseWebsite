@@ -53,7 +53,7 @@
 
         .col-xs-6 p {
             font-size: large;
-            color: white;
+            color: black;
             text-indent: 2em;
         }
 
@@ -112,7 +112,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="./notice.html">公告 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">作业</a></li>
+                <li><a href="./homeworklist.html">作业</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">学习交流 <span class="caret"></span></a>
@@ -120,15 +120,11 @@
                         <li><a href="./q&a.html">师生问答</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="./forum.html">学习论坛</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
             </ul>
 
-            <form class="navbar-form navbar-left" action="./search.html" method="get">
+            <form class="navbar-form navbar-left" action="./search.html" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" name="search" class="form-control" placeholder="Search">
@@ -207,12 +203,8 @@
     <div class="col-xs-6 col-md-6 center-block">
         <h2 class="text-center">最新作业</h2>
         <div id="notice2">
-            <p>这是作业栏</p>
-            <a href="index.html">link</a>
-            <p>dasdasdasdasdasd</p>
-            <p>dasdasdasdasdasd</p>
-            <p>dasdasdasdasdasd</p>
-            <p>dasdasdasdasdasd</p>
+            <p>作业标题；<a href="homeworkdetails.html?id={{ homework_id }}">{{ homework_title }}</a></p>
+            <p>简要内容：{{ homework_content }}<p>
         </div>
     </div>
 </div>

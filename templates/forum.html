@@ -161,25 +161,12 @@
         {% for t in topic %}
             <tr>
                 <td style="text-align: left"><a href="./topic.html?id={{ t.id }}">{{ t.title }}</a></td>
-                <td id="count"></td>
-                <script>
-                    var r;
-                    var count = 1;
-                    {% for r in reply %}
-                        count++;
-                    {% endfor %}
-                    $('#count').text(count)
-                </script>
+                <td >{{ t.reply_count }}</td>
                 <td>{{ t.author }}</td>
-                <td>{{ t.time }}</td>
+                <td style="font-size: inherit">{{ t.time }}</td>
             </tr>
         {% endfor %}
-        <tr>
-            <td style="text-align: left"><a href="./topic.html">title</a></td>
-            <td>reply_count</td>
-            <td>author</td>
-            <td>time</td>
-        </tr>
+
     </table>
 </div>
 <hr class="divider">

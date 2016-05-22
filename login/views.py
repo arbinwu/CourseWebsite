@@ -2,12 +2,14 @@ from django.shortcuts import render
 # from  django.contrib.auth.models import User
 from django.contrib import auth
 from notice.models import Notice
+from homework.models import Homework
 
 
 # Create your views here.
 def index(request):
     state = None
     notice = Notice.objects.order_by('-time')[0]
+    homework = Homework.objects.order_by('-time')[0]
     if request.user.is_authenticated():
         state = 'login'
         content = {
@@ -16,6 +18,9 @@ def index(request):
             'notice_title': notice.title,
             'notice_content': notice.content,
             'notice_id': notice.id,
+            'homework_title': homework.title,
+            'homework_content': homework.content,
+            'homework_id': homework.id,
         }
 
     else:

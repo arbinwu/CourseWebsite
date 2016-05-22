@@ -13,7 +13,7 @@ def register(request):
         first_name = str(request.POST['name'])
         password = str(request.POST['password'])
         repeat_password = str(request.POST['repeat_password'])
-        print(username)
+        # print(username)
         if username == '':
             is_error = True
             error = '用户名不能为空'
@@ -56,3 +56,7 @@ def register(request):
             'state': state,
         }
     return render(request, 'register.html', content)
+
+
+def test(request):
+    return render(request, 'test.html')

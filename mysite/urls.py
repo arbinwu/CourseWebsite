@@ -21,6 +21,8 @@ from register import views as register_views
 from notice import views as notice_views
 from question import views as question_views
 from forum import views as forum_views
+from search import views as search_views
+from homework import views as homework_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -37,5 +39,12 @@ urlpatterns = [
     url(r'^forum.html', forum_views.view),
     url(r'^topic.html', forum_views.topic),
     url(r'^add_topic.html', forum_views.add_topic),
-    url(r'^add_reply.html', forum_views.add_reply),
+    url(r'^add_reply.html',forum_views.add_reply),
+    url(r'^search.html', search_views.search),
+    url(r'^homeworklist.html', homework_views.view),
+    url(r'^add_homework.html', homework_views.add_homework),
+    url(r'^homeworkdetails.html', homework_views.homework_details),
+    url(r'^upload', homework_views.upload),
+    url(r'^score', homework_views.score),
+    url(r'detection', homework_views.detection),
 ]

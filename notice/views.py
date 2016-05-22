@@ -3,6 +3,7 @@ from notice.models import Notice
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 
+
 # 动态建表
 # def create(request):
 # cursor = connection.cursor()
@@ -109,6 +110,7 @@ def add(request):
         new_notice = Notice.objects.create(title=new_title, author=new_author, content=new_content)
         new_notice.save()
         error = '公告发布成功，请查看！'
+        return HttpResponseRedirect('notice.html')
     if request.user.is_authenticated():
         state = 'login'
         content = {

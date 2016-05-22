@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Title-->
+    <link rel="shortcut icon" href="/static/Image/title.jpg"/>
+    <title>Graduation Project</title>
+    <!-- Bootstrap core CSS -->
+    {#    <link href="bootstrap.min.css" rel="stylesheet">#}
+    <link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+            padding-right: 0px !important;
+            min-width: 1000px;
+            min-height: 100%;
+        }
+
+        .container {
+            width: 100% !important;
+        }
+
+        hr {
+            border-color: #d5d5d5;
+        }
+
+        .divider {
+            margin-top: 40px;
+        }
+
+        .modal-open {
+            overflow: initial;
+        }
+
+        #About {
+            padding-top: 10%;
+        }
+
+        #homework {
+            margin: 50px;
+            min-height: 200px;
+        {#            overflow-y: scroll;#} word-wrap: break-word;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #content {
+            width: 700px;
+            text-indent: 2em;
+            font-family: "Microsoft YaHei UI", monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">搜索引擎在线课程网站</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="./notice.html">公告 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">作业</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">学习交流 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">师生问答</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">学习论坛</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" action="./search.html" method="get">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right" style="margin: 0px">
+                {% if state == None %}
+                    <li><a href="./login.html">登录</a></li>
+                {% endif %}
+                {% if state == 'login' %}
+                    <li><a>欢迎，{{ user }}</a></li>
+                    <li><a href="./logout.html">注销</a></li>
+                {% endif %}
+                <li><a href="./register.html">注册</a></li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#About">关于</a>
+                </li>
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="homework">
+    <div>
+        <h2 style="text-align: center">作业详情</h2>
+    </div>
+    <div style="text-align: center;font-size: 17px">
+        发布作者：{{ homework.author }}&nbsp;&nbsp; 发布时间：{{ homework.time }}
+    </div>
+
+    <div id="content" class="center-block">
+        <pre style="font-size: 14px">{{ homework.content }}</pre>
+    </div>
+</div>
+<div style="min-height: 300px;">
+    {% if permission == 0 %}
+        <div style="min-height: 200px">
+            <form method="post" enctype="multipart/form-data" action="./upload">
+                {% csrf_token %}
+                <input name="homework_id" style="display: none" value='{{ homework.id }}'/>
+                {#            <button class="btn btn-primary btn-lg center-block">提交作业</button>#}
+                <div style="padding-left: 40%">
+                    <input style="margin-bottom: 30px" type="file" name="uploadfile"/>
+                    <input type="submit" class="btn btn-primary " value="提交作业"/>
+                </div>
+            </form>
+        </div>
+    {% elif permission == 1 %}
+        <p style="font-size: large;text-align: center">已有{{ count }}人提交作业</p>
+        <div style="text-align: right;width: auto;margin: 0 auto;height: auto;display: table;">
+        {% for r in results %}
+            <div >
+                <div >
+                    <form action="./score" method="post">
+                        {% csrf_token %}
+                        <p><span style="min-width: 50px">{{ r.author }}</span>&nbsp;&nbsp;<a href={{ r.path }} download>下载</a>&nbsp;&nbsp;
+                            当前成绩：{{ r.score }}&nbsp;&nbsp;
+                            <input name="score" style="width: 50px" value="0"/>
+                            <button type="submit">评分</button>
+                        </p>
+                        <input name="id" style="display: none" value='{{ r.id }}'/>
+                        <input name="homework_id" style="display: none" value='{{ homework.id }}'/>
+                    </form>
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+        <form method="post" action="./detection">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success center-block">检测相似度</button>
+            <input name="homework_id" style="display: none" value='{{ homework.id }}'/>
+        </form>
+        <div id="show">
+            {% if flag == 1 %}
+                {% for s in source %}
+                    <p class="s">{{ s }}</p>
+                {% endfor %}
+                {% for c in compare %}
+                    <p class="c">{{ c }}</p>
+                {% endfor %}
+                {% for r in similar %}
+                    <p class="r">{{ r }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{#<hr class="divider">#}
+{#    <div>#}
+{#    <footer class="center-block ">#}
+{#        <p class="pull-right">#}
+{#            <a href="#top" style="padding-right: 20px">#}
+{#                <button type="button" class="btn btn-default">#}
+{#                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>#}
+{#                    Top#}
+{#                </button>#}
+{#            </a>#}
+{#        </p>#}
+{#        <p class="text-center">Copyright@ 2016Arbin Wu#}
+{#        <a href="mailto:arbinwu2016@gmail.com">联系我</a>#}
+{#        </p>#}
+{#    </footer>#}
+<div class="modal fade" id="About">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">关于</h4>
+            </div>
+            <div class="modal-body">
+                <p>内容</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{#</div>#}
+<!-- jquery JavaScript -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="/static/js/bootstrap.min.js"></script>
+<script>
+    var length = Number('{{ length }}');
+    var r = [];
+    var s = [];
+    var c = [];
+    var str = '';
+    for(var i = 0;i < length;i++){
+        r.push($('.r').eq(i).text());
+        s.push($('.s').eq(i).text());
+        c.push($('.c').eq(i).text());
+    }
+    for(var i = 0;i < length;i++){
+        str += '<p style="text-align: center">' + s[i] + '与' + c[i] + '作业相似度为' + r[i] + '%</p>' ;
+    }
+    $('#show').html('').html(str);
+</script>
+</body>
+</html>

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'notice',
     'question',
     'forum',
+    'search',
+    'homework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -129,3 +131,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+

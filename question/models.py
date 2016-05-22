@@ -15,7 +15,7 @@ class Answer(models.Model):
     answerer = models.CharField(max_length=40)
     content = models.TextField()
     time = models.DateTimeField(auto_now=True)
-    question_id = models.IntegerField(default=None)
+    questions_id = models.IntegerField(default=None)
 
     def __unicode__(self):
         return self.answerer

@@ -5,8 +5,13 @@
       <w>bootcss</w>
       <w>courseweb</w>
       <w>coursewebsite</w>
+      <w>homeworkdetails</w>
+      <w>homeworklist</w>
+      <w>indexdir</w>
+      <w>levenshtein</w>
       <w>mysite</w>
       <w>tablist</w>
+      <w>uploadfile</w>
       <w>userid</w>
     </words>
   </dictionary>
