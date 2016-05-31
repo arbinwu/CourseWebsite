@@ -29,6 +29,9 @@ def index(request):
             'notice_title': notice.title,
             'notice_content': notice.content,
             'notice_id': notice.id,
+            'homework_title': homework.title,
+            'homework_content': homework.content,
+            'homework_id': homework.id,
         }
 
     return render(request, 'index.html', content)
@@ -36,18 +39,23 @@ def index(request):
 
 def login(request):
     notice = Notice.objects.order_by('-time')[0]
+    homework = Homework.objects.order_by('-time')[0]
     if 'username' in request.POST:
         username = str(request.POST['username'])
         password = str(request.POST['password'])
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
-            # Correct password, and the user is marked "active"
             auth.login(request, user)
 
-            # Redirect to a success page.
             state = 'login'
             content = {
                 'state': state,
+                'notice_title': notice.title,
+                'notice_content': notice.content,
+                'notice_id': notice.id,
+                'homework_title': homework.title,
+                'homework_content': homework.content,
+                'homework_id': homework.id,
                 'user': request.user.first_name,
             }
             # print(request.user.is_staff)
@@ -61,6 +69,9 @@ def login(request):
                 'notice_title': notice.title,
                 'notice_content': notice.content,
                 'notice_id': notice.id,
+                'homework_title': homework.title,
+                'homework_content': homework.content,
+                'homework_id': homework.id,
             }
             return render(request, 'login.html', content)
 
@@ -70,6 +81,7 @@ def login(request):
 
 def logout(request):
     notice = Notice.objects.order_by('-time')[0]
+    homework = Homework.objects.order_by('-time')[0]
     if request.user.is_authenticated():
         auth.logout(request)
         state = None
@@ -78,8 +90,11 @@ def logout(request):
             'notice_title': notice.title,
             'notice_content': notice.content,
             'notice_id': notice.id,
+            'homework_title': homework.title,
+            'homework_content': homework.content,
+            'homework_id': homework.id,
         }
-        return render(request, 'index.html', content)
+    return render(request, 'index.html', content)
 
 # def login(request):
 #     # user = auth.authenticate(username='john', password='secret')

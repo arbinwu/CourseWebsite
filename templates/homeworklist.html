@@ -89,26 +89,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">搜索引擎在线课程网站</a>
+            <a class="navbar-brand" href="/"> 搜索引擎在线课程网站</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="./notice.html">公告 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">作业</a></li>
+                <li><a href="./homeworklist.html">作业</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">学习交流 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">师生问答</a></li>
+                        <li><a href="./q&a.html">师生问答</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">学习论坛</a></li>
+                        <li><a href="./forum.html">学习论坛</a></li>
                     </ul>
                 </li>
             </ul>
 
-            <form class="navbar-form navbar-left" action="./search.html" method="get">
+            <form class="navbar-form navbar-left" action="./search.html" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" name="search" class="form-control" placeholder="Search">
