@@ -8,6 +8,7 @@ from whoosh.analysis import Tokenizer, Token
 import jieba
 from notice.models import Notice
 from forum.models import Topic
+from homework.models import Homework
 
 
 class ChineseTokenizer(Tokenizer):
@@ -41,12 +42,15 @@ def search(request):
     ix = create_in('D:\Graduation Project\CourseWebsite\indexdir', schema)
     notice = Notice.objects.all()
     topic = Topic.objects.all()
+    homework = Homework.objects.all()
 
     writer = ix.writer()
     for n in notice:
         writer.add_document(title=n.title, author=n.author, content=n.content, id=n.id, flag=0)
     for t in topic:
         writer.add_document(title=t.title, author=t.author, content=t.content, id=t.id, flag=t.is_topic)
+    for h in homework:
+        writer.add_document(title=h.title, author=h.author, content=h.content, id=h.id, flag=h.is_work)
     writer.commit()
 
     searcher = ix.searcher()

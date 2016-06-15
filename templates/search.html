@@ -167,6 +167,10 @@
                     {% if r.flag == 1 %}
                         <p>主题：<a href="./topic.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp; 作者：{{ r.author }}</p>
                         <pre>{{ r.content }}</pre>
+                    {% elif r.flag == 2 %}
+                        <p>主题：<a href="./homeworkdetails.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp;
+                            作者：{{ r.author }}</p>
+                        <pre>{{ r.content }}</pre>
                     {% else %}
                         <p>主题：<a href="./details.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp; 作者：{{ r.author }}
                         </p>
@@ -177,6 +181,10 @@
                     {% if r.flag == 1 %}
                         <p>主题：<a href="./topic.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp; 作者：{{ r.author }}</p>
                         <pre>{{ r.content }}</pre>
+                    {% elif r.flag == 2 %}
+                        <p>主题：<a href="./homeworkdetails.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp;
+                            作者：{{ r.author }}</p>
+                        <pre>{{ r.content }}</pre>
                     {% else %}
                         <p>主题：<a href="./details.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp; 作者：{{ r.author }}
                         </p>
@@ -186,6 +194,10 @@
                 {% for r in author_results %}
                     {% if r.flag == 1 %}
                         <p>主题：<a href="./topic.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp; 作者：{{ r.author }}</p>
+                        <pre>{{ r.content }}</pre>
+                    {% elif r.flag == 2 %}
+                        <p>主题：<a href="./homeworkdetails.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp;
+                            作者：{{ r.author }}</p>
                         <pre>{{ r.content }}</pre>
                     {% else %}
                         <p>主题：<a href="./details.html?id={{ r.id }}">{{ r.title }}</a> &nbsp;&nbsp; 作者：{{ r.author }}
